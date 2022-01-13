@@ -1,0 +1,37 @@
+ext {
+  // Android
+  androidMinSdkVersion = 21
+  androidTargetSdkVersion = 31
+  androidCompileSdkVersion = 31
+
+  androidApplicationId = "com.coroutineshub"
+  androidVersionCode = 1
+  androidVersionName = "1.0"
+
+  // Libraries
+  gradleVersion = '7.0.2'
+  kotlinVersion = '1.5.21'
+  androidxCoreVersion = '1.7.0'
+  appCompatVersion = '1.4.1'
+  materialVersion = '1.4.0'
+  constraintVersion = '2.1.2'
+
+  //Testing
+  jUnitVersion = '4.13'
+
+  presentationDependencies = [kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+                              androidxCore: "androidx.core:core-ktx:${androidxCoreVersion}",
+                              appCompat   : "androidx.appcompat:appcompat:${appCompatVersion}",
+                              material    : "com.google.android.material:material:${materialVersion}",
+                              constraint  : "androidx.constraintlayout:constraintlayout:${constraintVersion}"]
+
+  presentationTestDependencies = [junit: "junit:junit:${jUnitVersion}",
+
+  ]
+
+  domainDependencies = [
+      kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+  ]
+
+  dataDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"]
+}

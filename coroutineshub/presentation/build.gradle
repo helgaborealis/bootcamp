@@ -1,0 +1,48 @@
+plugins {
+  id 'com.android.application'
+  id 'kotlin-android'
+}
+
+android {
+  def globalConfiguration = rootProject.ext
+  compileSdk globalConfiguration.androidCompileSdkVersion
+
+  defaultConfig {
+
+    applicationId globalConfiguration.androidApplicationId
+    minSdk globalConfiguration.androidMinSdkVersion
+    targetSdk globalConfiguration.androidTargetSdkVersion
+
+    versionCode globalConfiguration.androidVersionCode
+    versionName globalConfiguration.androidVersionName
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+}
+
+dependencies {
+  def presentationDependencies = rootProject.ext.presentationDependencies
+  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+  implementation presentationDependencies.androidxCore
+  implementation presentationDependencies.appCompat
+  implementation presentationDependencies.material
+  implementation presentationDependencies.constraint
+  implementation presentationDependencies.kotlin
+
+  testImplementation presentationTestDependencies.junit
+}
