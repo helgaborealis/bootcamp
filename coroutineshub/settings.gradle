@@ -10,3 +10,4 @@ rootProject.name = "coroutineshub"
 include ':presentation'
 include ':domain'
 include ':data'
+include ':utils'

@@ -1,0 +1,11 @@
+plugins {
+  id 'kotlin'
+}
+
+dependencies {
+
+  def utilityDependencies = rootProject.ext.utilityDependencies
+
+  implementation utilityDependencies.kotlin
+  implementation utilityDependencies.javaxInject
+}

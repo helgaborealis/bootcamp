@@ -40,5 +40,6 @@ dependencies {
   implementation project(':domain')
 
   implementation dataDependencies.kotlin
+  implementation dataDependencies.javaxInject
 
 }

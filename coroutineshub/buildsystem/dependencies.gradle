@@ -16,22 +16,29 @@ ext {
   materialVersion = '1.4.0'
   constraintVersion = '2.1.2'
 
+  javaxInjectVersion = '1'
+
   //Testing
   jUnitVersion = '4.13'
 
   presentationDependencies = [kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+                              javaxInject : "javax.inject:javax.inject:${javaxInjectVersion}",
                               androidxCore: "androidx.core:core-ktx:${androidxCoreVersion}",
                               appCompat   : "androidx.appcompat:appcompat:${appCompatVersion}",
                               material    : "com.google.android.material:material:${materialVersion}",
                               constraint  : "androidx.constraintlayout:constraintlayout:${constraintVersion}"]
 
-  presentationTestDependencies = [junit: "junit:junit:${jUnitVersion}",
+  presentationTestDependencies = [junit: "junit:junit:${jUnitVersion}"
 
   ]
 
-  domainDependencies = [
-      kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
-  ]
+  domainDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+                        javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
 
-  dataDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"]
+  dataDependencies =
+      [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+       javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
+
+  utilityDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+                         javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
 }

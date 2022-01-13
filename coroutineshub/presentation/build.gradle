@@ -38,11 +38,15 @@ dependencies {
   def presentationDependencies = rootProject.ext.presentationDependencies
   def presentationTestDependencies = rootProject.ext.presentationTestDependencies
 
+  implementation presentationDependencies.kotlin
+  implementation presentationDependencies.javaxInject
+
+
   implementation presentationDependencies.androidxCore
   implementation presentationDependencies.appCompat
   implementation presentationDependencies.material
   implementation presentationDependencies.constraint
-  implementation presentationDependencies.kotlin
+
 
   testImplementation presentationTestDependencies.junit
 }
