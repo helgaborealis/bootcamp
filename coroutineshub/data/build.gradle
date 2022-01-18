@@ -1,6 +1,8 @@
 plugins {
-  id 'com.android.library'
+  id "com.android.library"
   id 'kotlin-android'
+  id 'kotlin-kapt'
+  id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -11,8 +13,6 @@ android {
   defaultConfig {
     minSdk globalConfiguration.androidMinSdkVersion
     targetSdk globalConfiguration.androidTargetSdkVersion
-    versionCode globalConfiguration.androidVersionCode
-    versionName globalConfiguration.androidVersionName
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"
@@ -25,21 +25,46 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility globalConfiguration.javaVersion
+    targetCompatibility globalConfiguration.javaVersion
   }
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = globalConfiguration.jvmTarget
   }
 }
 
 dependencies {
-
-  def dataDependencies = rootProject.ext.dataDependencies
-
   implementation project(':domain')
 
-  implementation dataDependencies.kotlin
-  implementation dataDependencies.javaxInject
+  def deps = rootProject.ext.deps
+  def testDeps = rootProject.ext.testDeps
+
+  implementation deps.kotlin
+  implementation deps.coroutines
+
+  implementation deps.retrofit
+  implementation deps.retrofitGson
+  implementation deps.retrofitAdapter
+  implementation deps.retrofitScalars
+  implementation deps.okhttp
+  implementation deps.okhttpInterceptor
+
+  implementation deps.gson
+
+  implementation deps.hilt
+  kapt deps.hiltCompiler
+
+  implementation deps.room
+  kapt deps.roomCompiler
+
+  implementation deps.timber
+
+  // Testing
+  androidTestImplementation testDeps.androidxTest
+  androidTestImplementation testDeps.espressoCore
+
+  testImplementation testDeps.junit
+  testImplementation testDeps.robolectric
+  testImplementation testDeps.mockkCore
 
 }

@@ -35,18 +35,19 @@ android {
 }
 
 dependencies {
-  def presentationDependencies = rootProject.ext.presentationDependencies
-  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+  def deps = rootProject.ext.deps
+  def testDeps = rootProject.ext.testDeps
 
-  implementation presentationDependencies.kotlin
-  implementation presentationDependencies.javaxInject
+  implementation project(':domain')
+  implementation project(':data')
+  implementation project(':utils')
+
+  implementation deps.kotlin
+  implementation deps.javaxInject
+
+  implementation deps.androidxCore
+  implementation deps.material
 
 
-  implementation presentationDependencies.androidxCore
-  implementation presentationDependencies.appCompat
-  implementation presentationDependencies.material
-  implementation presentationDependencies.constraint
-
-
-  testImplementation presentationTestDependencies.junit
+  testImplementation testDeps.junit
 }

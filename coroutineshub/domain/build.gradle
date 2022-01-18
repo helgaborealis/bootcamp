@@ -3,10 +3,10 @@ plugins {
 }
 
 dependencies {
-  def domainDependencies = rootProject.ext.domainDependencies
+  def deps = rootProject.ext.deps
 
   implementation project(':utils')
 
-  implementation domainDependencies.kotlin
-  implementation domainDependencies.javaxInject
+  implementation deps.kotlin
+  implementation deps.javaxInject
 }

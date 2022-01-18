@@ -1,44 +1,135 @@
 ext {
+  javaVersion = JavaVersion.VERSION_1_8
+  jvmTarget = '1.8'
+
   // Android
-  androidMinSdkVersion = 21
-  androidTargetSdkVersion = 31
-  androidCompileSdkVersion = 31
+  androidMinSdkVersion = 24
+  androidTargetSdkVersion = 32
+  androidCompileSdkVersion = 32
 
   androidApplicationId = "com.coroutineshub"
   androidVersionCode = 1
   androidVersionName = "1.0"
 
   // Libraries
-  gradleVersion = '7.0.2'
-  kotlinVersion = '1.5.21'
-  androidxCoreVersion = '1.7.0'
-  appCompatVersion = '1.4.1'
-  materialVersion = '1.4.0'
-  constraintVersion = '2.1.2'
+  gradleVersion = '7.0.4'
+  kotlinVersion = '1.6.10'
+  coroutinesVersion = '1.3.9'
 
+  navVersion = "2.3.5"
+  androidxCoreVersion = '1.7.0'
+  materialVersion = '1.4.0'
+  lifecycleKtxVersion = '2.3.1'
+  lifecycleKtxExtVersion = '2.2.0'
+
+  splashVersion = '1.0.0-alpha02'
+  coordinatorLayoutVersion = '1.1.0'
+  recyclerViewVersion = '1.2.1'
+  swipeRefreshViewVersion = '1.0.0'
+  viewPager2ViewVersion = '1.0.0'
+  cardViewVersion = '1.0.0'
+  constrainLayoutVersion = '2.1.2'
+  materialVersion = '1.4.0'
+  progressButtonVersion = '2.0.1'
+
+  gsonVersion = '2.8.9'
+  retrofitVersion = '2.9.0'
+  okhttpVersion = '4.9.0'
+  okHttpProfilerVersion = '1.0.8'
+  adapterDelegatesVersion = '4.3.0'
+  timberVersion = '4.7.1'
+
+  hiltVersion = '2.40.5'
   javaxInjectVersion = '1'
 
-  //Testing
+  roomVersion = '2.4.0'
+
+  glideVersion = '4.11.0'
+  glideTransformVersion = '4.3.0'
+
+  // Testing
   jUnitVersion = '4.13'
+  androidxTestVersion = '1.4.0'
+  androidxTestJunitVersion = '1.1.3'
+  androidxCoreTestVersion = '1.4.0'
+  androidxFragmentTestVersion = '1.4.0-alpha03'
+  androidxArchCoreVersion = '2.1.0'
+  espressoVersion = '3.4.0'
+  mockkVersion = '1.12.0'
+  robolectricVersion = '4.6.1'
 
-  presentationDependencies = [kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-                              javaxInject : "javax.inject:javax.inject:${javaxInjectVersion}",
-                              androidxCore: "androidx.core:core-ktx:${androidxCoreVersion}",
-                              appCompat   : "androidx.appcompat:appcompat:${appCompatVersion}",
-                              material    : "com.google.android.material:material:${materialVersion}",
-                              constraint  : "androidx.constraintlayout:constraintlayout:${constraintVersion}"]
+  // Development
+  leakCanaryVersion = '2.7'
 
-  presentationTestDependencies = [junit: "junit:junit:${jUnitVersion}"
+  deps = [
+      kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+      //Coroutines
+      coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+      //Navigation
+      androidNavigationFragment: "androidx.navigation:navigation-fragment-ktx:$navVersion",
+      androidNavigationUi: "androidx.navigation:navigation-ui-ktx:$navVersion",
+      androidNavigationRuntime: "androidx.navigation:navigation-runtime-ktx:$navVersion",
+      androidNavigationDynamic: "androidx.navigation:navigation-dynamic-features-fragment:$navVersion",
+      //Android views
+      androidxCore: "androidx.core:core-ktx:${androidxCoreVersion}",
+      androidxCompat: "androidx.appcompat:appcompat:${materialVersion}",
+      androidxSplash: "androidx.core:core-splashscreen:${splashVersion}",
+      coordinatorLayout: "androidx.coordinatorlayout:coordinatorlayout:${coordinatorLayoutVersion}",
+      constrainLayout: "androidx.constraintlayout:constraintlayout:${constrainLayoutVersion}",
+      recyclerView: "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
+      material: "com.google.android.material:material:${materialVersion}",
+      viewPager: "androidx.viewpager2:viewpager2:${viewPager2ViewVersion}",
+      cardView: "androidx.cardview:cardview:${cardViewVersion}",
+      swipeRefresh: "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshViewVersion}",
+      progressButton: "com.github.razir.progressbutton:progressbutton:${progressButtonVersion}",
+      //Lifecycle
+      lifecycleKtx: "androidx.lifecycle:lifecycle-extensions:${lifecycleKtxExtVersion}",
+      liveDataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleKtxVersion}",
+      viewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleKtxVersion}",
+      hiltViewModel: "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03",
+      lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:${lifecycleKtxVersion}",
+      //Hilt
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltVersion}",
+      //Glide
+      glide: "com.github.bumptech.glide:glide:${glideVersion}",
+      glideOkhttp: "com.github.bumptech.glide:okhttp3-integration:${glideVersion}",
+      glideProcessor: "com.github.bumptech.glide:compiler:${glideVersion}",
+      glideTransform: "jp.wasabeef:glide-transformations:${glideTransformVersion}",
+      //Adapter
+      adapterDelegates: "com.hannesdorfmann:adapterdelegates4:${adapterDelegatesVersion}",
+      //Logger
+      timber: "com.jakewharton.timber:timber:${timberVersion}",
 
+      //retrofit
+      retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+      retrofitAdapter: "com.squareup.retrofit2:adapter-rxjava3:${retrofitVersion}",
+      retrofitScalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}",
+      okhttp: "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+      okhttpInterceptor: "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+      //gson
+      gson: "com.google.code.gson:gson:${gsonVersion}",
+      //room
+      room: "androidx.room:room-runtime:${roomVersion}",
+      roomCompiler: "androidx.room:room-compiler:${roomVersion}",
+
+      javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}",
+      leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
   ]
 
-  domainDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-                        javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
+  testDeps = [
+      junit: "junit:junit:${jUnitVersion}",
+      androidxTestFragment: "androidx.fragment:fragment-testing:${androidxFragmentTestVersion}",
+      androidxArchTestCore: "androidx.arch.core:core-testing:${androidxArchCoreVersion}",
+      androidxTestRunner: "androidx.test:runner:${androidxTestVersion}",
+      androidxTestRules: "androidx.test:rules:${androidxTestVersion}",
+      androidxTestCore: "androidx.test:core-ktx:${androidxCoreTestVersion}",
+      androidxTestExt: "androidx.test.ext:junit-ktx:${androidxTestJunitVersion}",
+      espressoCore: "androidx.test.espresso:espresso-core:${espressoVersion}",
+      robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+      mockkCore: "io.mockk:mockk:${mockkVersion}",
 
-  dataDependencies =
-      [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-       javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
-
-  utilityDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-                         javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
+      androidxTest: "androidx.test:runner:${androidxTestVersion}"
+  ]
 }
