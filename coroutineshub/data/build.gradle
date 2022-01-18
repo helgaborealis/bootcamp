@@ -34,8 +34,6 @@ android {
 }
 
 dependencies {
-  implementation project(':domain')
-
   def deps = rootProject.ext.deps
   def testDeps = rootProject.ext.testDeps
 
@@ -66,7 +64,6 @@ dependencies {
   testImplementation testDeps.junit
   testImplementation testDeps.robolectric
   testImplementation testDeps.mockkCore
-
 }
 
 kapt {

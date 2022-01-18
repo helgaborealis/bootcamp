@@ -1,5 +1,5 @@
 plugins {
-  id "com.android.library"
+  id 'com.android.library'
   id 'kotlin-android'
   id 'kotlin-kapt'
   id 'dagger.hilt.android.plugin'
@@ -33,35 +33,14 @@ android {
 
 dependencies {
   def deps = rootProject.ext.deps
-  def testDeps = rootProject.ext.testDeps
+
+  implementation project(':data')
 
   implementation deps.kotlin
   implementation deps.coroutines
 
-  implementation deps.retrofit
-  implementation deps.retrofitGson
-  implementation deps.retrofitAdapter
-  implementation deps.retrofitScalars
-  implementation deps.okhttp
-  implementation deps.okhttpInterceptor
-
-  implementation deps.gson
-
   implementation deps.hilt
   kapt deps.hiltCompiler
-
-  implementation deps.room
-  kapt deps.roomCompiler
-
-  implementation deps.timber
-
-  // Testing
-  androidTestImplementation testDeps.androidxTest
-  androidTestImplementation testDeps.espressoCore
-
-  testImplementation testDeps.junit
-  testImplementation testDeps.robolectric
-  testImplementation testDeps.mockkCore
 }
 
 kapt {
