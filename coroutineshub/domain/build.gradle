@@ -1,12 +1,69 @@
 plugins {
-  id 'kotlin'
+  id "com.android.library"
+  id 'kotlin-android'
+  id 'kotlin-kapt'
+  id 'dagger.hilt.android.plugin'
+}
+
+android {
+  def globalConfiguration = rootProject.ext
+  compileSdk globalConfiguration.androidCompileSdkVersion
+
+  defaultConfig {
+    minSdk globalConfiguration.androidMinSdkVersion
+    targetSdk globalConfiguration.androidTargetSdkVersion
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility globalConfiguration.javaVersion
+    targetCompatibility globalConfiguration.javaVersion
+  }
+  kotlinOptions {
+    jvmTarget = globalConfiguration.jvmTarget
+  }
 }
 
 dependencies {
   def deps = rootProject.ext.deps
-
-  implementation project(':utils')
+  def testDeps = rootProject.ext.testDeps
 
   implementation deps.kotlin
-  implementation deps.javaxInject
+  implementation deps.coroutines
+
+  implementation deps.retrofit
+  implementation deps.retrofitGson
+  implementation deps.retrofitAdapter
+  implementation deps.retrofitScalars
+  implementation deps.okhttp
+  implementation deps.okhttpInterceptor
+
+  implementation deps.gson
+
+  implementation deps.hilt
+  kapt deps.hiltCompiler
+
+  implementation deps.room
+  kapt deps.roomCompiler
+
+  implementation deps.timber
+
+  // Testing
+  androidTestImplementation testDeps.androidxTest
+  androidTestImplementation testDeps.espressoCore
+
+  testImplementation testDeps.junit
+  testImplementation testDeps.robolectric
+  testImplementation testDeps.mockkCore
+}
+
+kapt {
+  correctErrorTypes true
 }

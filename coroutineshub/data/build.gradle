@@ -68,3 +68,7 @@ dependencies {
   testImplementation testDeps.mockkCore
 
 }
+
+kapt {
+  correctErrorTypes true
+}
