@@ -33,7 +33,7 @@ android {
     }
   }
 
-//  dynamicFeatures = ['']
+  dynamicFeatures = [':features:auth']
 
   compileOptions {
     sourceCompatibility globalConfiguration.javaVersion

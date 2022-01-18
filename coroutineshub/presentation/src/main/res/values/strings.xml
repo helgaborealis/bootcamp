@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">coroutineshub</string>
+	<string name="label_auth">Auth</string>
 </resources>

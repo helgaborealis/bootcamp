@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/nav_graph"
+		app:startDestination="@id/mainFragment">
+
+	<fragment
+			android:id="@+id/mainFragment"
+			android:name="com.coroutineshub.MainFragment"
+			android:label="Main"
+			tools:layout="@layout/fragment_main">
+		<action
+				android:id="@+id/action_mainFragment_to_auth"
+				app:destination="@id/nav_graph_auth_feature"
+				app:popUpTo="@id/nav_graph"
+				app:popUpToInclusive="true" />
+	</fragment>
+
+	<!-- Auth dynamic feature module -->
+	<include-dynamic
+			android:id="@+id/nav_graph_auth_feature"
+			android:name="co.alty.auth"
+			app:graphResName="nav_graph_auth_feature"
+			app:moduleName="auth" />
+
+</navigation>
