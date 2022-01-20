@@ -1,13 +1,13 @@
 plugins {
-  id "com.android.library"
+  id 'com.android.dynamic-feature'
   id 'kotlin-android'
   id 'kotlin-kapt'
   id 'dagger.hilt.android.plugin'
+  id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
   def globalConfiguration = rootProject.ext
-
   compileSdk globalConfiguration.androidCompileSdkVersion
 
   defaultConfig {
@@ -15,7 +15,6 @@ android {
     targetSdk globalConfiguration.androidTargetSdkVersion
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -23,6 +22,9 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
+  }
+  buildFeatures {
+    viewBinding true
   }
   compileOptions {
     sourceCompatibility globalConfiguration.javaVersion
@@ -35,35 +37,35 @@ android {
 
 dependencies {
   def deps = rootProject.ext.deps
-  def testDeps = rootProject.ext.testDeps
+
+  implementation project(':presentation')
+  implementation project(':data')
+  implementation project(':domain')
 
   implementation deps.kotlin
   implementation deps.coroutines
 
-  implementation deps.retrofit
-  implementation deps.retrofitGson
-  implementation deps.retrofitAdapter
-  implementation deps.retrofitScalars
-  implementation deps.okhttp
-  implementation deps.okhttpInterceptor
+  implementation deps.androidNavigationFragment
+  implementation deps.androidNavigationUi
+  implementation deps.androidNavigationRuntime
+  implementation deps.androidNavigationDynamic
 
-  implementation deps.gson
+  implementation deps.lifecycleKtx
+  implementation deps.liveDataKtx
+  implementation deps.viewModel
+  implementation deps.hiltViewModel
+  kapt deps.lifecycleCompiler
+
+  implementation deps.androidxCore
+  implementation deps.material
+  implementation deps.recyclerView
+  implementation deps.viewPager
+  implementation deps.cardView
+  implementation deps.swipeRefresh
+  implementation deps.progressButton
 
   implementation deps.hilt
   kapt deps.hiltCompiler
-
-  implementation deps.room
-  kapt deps.roomCompiler
-
-  implementation deps.timber
-
-  // Testing
-  androidTestImplementation testDeps.androidxTest
-  androidTestImplementation testDeps.espressoCore
-
-  testImplementation testDeps.junit
-  testImplementation testDeps.robolectric
-  testImplementation testDeps.mockkCore
 }
 
 kapt {

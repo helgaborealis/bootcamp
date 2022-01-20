@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
 
-  def utilityDependencies = rootProject.ext.utilityDependencies
+  def deps = rootProject.ext.deps
 
-  implementation utilityDependencies.kotlin
-  implementation utilityDependencies.javaxInject
+  implementation deps.kotlin
+  implementation deps.javaxInject
 }

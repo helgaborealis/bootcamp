@@ -1,6 +1,9 @@
 plugins {
   id 'com.android.application'
   id 'kotlin-android'
+  id "kotlin-kapt"
+  id 'dagger.hilt.android.plugin'
+  id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -19,34 +22,91 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  buildFeatures {
+    viewBinding true
+  }
+
   buildTypes {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
+  dynamicFeatures = [':features:auth']
+
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility globalConfiguration.javaVersion
+    targetCompatibility globalConfiguration.javaVersion
   }
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = globalConfiguration.jvmTarget
   }
 }
 
 dependencies {
-  def presentationDependencies = rootProject.ext.presentationDependencies
-  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+  def deps = rootProject.ext.deps
+  def testDeps = rootProject.ext.testDeps
 
-  implementation presentationDependencies.kotlin
-  implementation presentationDependencies.javaxInject
+  implementation project(':domain')
+  implementation project(':data')
+  implementation project(':utils')
 
+  implementation deps.kotlin
+  implementation deps.coroutines
 
-  implementation presentationDependencies.androidxCore
-  implementation presentationDependencies.appCompat
-  implementation presentationDependencies.material
-  implementation presentationDependencies.constraint
+  implementation deps.androidxCore
+  implementation deps.material
 
+  implementation deps.androidNavigationFragment
+  implementation deps.androidNavigationUi
 
-  testImplementation presentationTestDependencies.junit
+  implementation deps.androidNavigationRuntime
+  implementation deps.androidNavigationDynamic
+
+  implementation deps.androidxCompat
+  implementation deps.androidxSplash
+  implementation deps.constrainLayout
+  implementation deps.progressButton
+
+  implementation deps.lifecycleKtx
+  implementation deps.liveDataKtx
+  implementation deps.viewModel
+  implementation deps.hiltViewModel
+  kapt deps.lifecycleCompiler
+
+  implementation deps.hilt
+  kapt deps.hiltCompiler
+
+  implementation deps.glide
+  implementation deps.glideOkhttp
+  kapt deps.glideProcessor
+  implementation deps.glideTransform
+
+  implementation deps.adapterDelegates
+
+  implementation deps.timber
+
+  // Testing
+  androidTestImplementation testDeps.androidxTestRunner
+  androidTestImplementation testDeps.androidxTestRules
+  androidTestImplementation testDeps.espressoCore
+
+  testImplementation testDeps.junit
+  testImplementation testDeps.robolectric
+  testImplementation testDeps.mockkCore
+  testImplementation testDeps.robolectric
+  testImplementation testDeps.androidxTestCore
+  testImplementation testDeps.androidxArchTestCore
+  testImplementation testDeps.androidxTestExt
+  testImplementation testDeps.androidxTestRules
+
+  debugImplementation testDeps.androidxTestFragment
+
+  // Development
+  debugImplementation deps.leakCanary
+}
+
+kapt {
+  correctErrorTypes true
 }
